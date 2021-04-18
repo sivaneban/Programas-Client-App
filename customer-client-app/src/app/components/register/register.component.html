@@ -1,0 +1,117 @@
+<div>
+    <h2>Registeration Form</h2>
+    <form [formGroup]="registerationForm" (ngSubmit)="onSubmit()">
+
+        <div class="form-group">            
+            <input [class.is-invalid]="firstName.invalid && 
+            firstName.touched" formControlName="firstname" class="form-control" type="text" placeholder="FirstName">         
+            <small [class.d-none]="firstName.valid || 
+            firstName.untouched" class="text-danger">FirstName is required</small>
+        </div>        
+        <br>
+
+        <div>
+            <input [class.is-invalid]="lastName.invalid && 
+            lastName.touched" formControlName="lastname" type="text" placeholder="LastName" class="form-control">
+            <small [class.d-none]="lastName.valid || 
+            lastName.untouched" class="text-danger">LastName is required</small>
+        </div>
+        <br>
+
+        <div class="form-group">            
+            <input [class.is-invalid]="mobile.invalid && 
+            mobile.touched" formControlName="mobile" type="tel" placeholder="Mobile" class="form-control">            
+            <small [class.d-none]="mobile.valid || 
+            mobile.untouched" class="text-danger">Phone is required</small>
+        </div>
+        <br>
+
+        <div>
+            <input [class.is-invalid]="email.invalid && 
+            email.touched" formControlName="email" type="email" placeholder="Email" class="form-control">
+            <small [class.d-none]="email.valid || 
+            email.untouched" class="text-danger">Email is required</small>
+        </div>
+        <br>
+        
+        <div class="form-group">            
+            <input [class.is-invalid]="userName.invalid && 
+            userName.touched" formControlName="username" type="text" class="form-control" placeholder="UserName">
+            <small [class.d-none]="userName.valid || 
+            userName.untouched" class="text-danger">UserName is required</small>
+        </div>
+        <br>
+
+        <div>            
+            <input [class.is-invalid]="password.invalid && 
+            password.touched" formControlName="password" type="password" class="form-control" placeholder="Password">            
+        </div>
+        <small [class.d-none]="password.valid || 
+            password.untouched" class="text-danger">Password is required</small>
+        <br>
+
+        <div>            
+            <input [class.is-invalid]="registerationForm.errors?.misMatch" formControlName="confirmPassword" type="password" class="form-control" placeholder="Confirm Password">
+            <small class="text-danger" *ngIf="registerationForm.errors?.misMatch">Passwords do not match</small>
+        </div>
+        <br>
+
+        <div formGroupName="customerAddress">
+            <hr>
+            <label>Address: </label>
+            <div>                
+                <input #searchBox (input)="search(searchBox.value)" formControlName="AddressFull" type="text" class="form-control" placeholder="Address">
+                <ul>
+                    <li *ngFor="let fulladdress of fulladdresses | async" >
+                      {{fulladdress}}                      
+                    </li>
+                  </ul>
+            </div>
+            <br>
+
+            <div>                
+                <input formControlName="AddressLine1" type="text" class="form-control" placeholder="Address Line 1">
+            </div>
+            <br>
+
+            <div>                
+                <input formControlName="AddressLine2" type="text" class="form-control" placeholder="Address Line 2">
+            </div>
+            <br>
+
+            <div>                
+                <input formControlName="AddressLine3" type="text" class="form-control" placeholder="Address Line 3">
+            </div>
+            <br>
+
+            <div>                
+                <input formControlName="city" type="text" class="form-control" placeholder="City">
+            </div>
+            <br>
+
+            <div>                
+                <input formControlName="state" type="text" class="form-control" placeholder="State">
+            </div>
+            <br>
+
+            <div>                
+                <input formControlName="Postcode" type="text" class="form-control" placeholder="PostCode">
+            </div>
+            <br>
+
+            <div>                
+                <input formControlName="Country" type="text" class="form-control" placeholder="Country">
+            </div>
+            <br>
+
+        </div>
+        <br>
+
+        <button [disabled]="!registerationForm.valid" class="btn btn-primary" type="submit">Register</button>
+         &nbsp;
+        <button (click)="loadApiData()" class="btn btn-secondary ml-2" type="button">Load Api Data</button>
+        
+    </form>  
+    <br>
+</div>
+
